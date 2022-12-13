@@ -15,9 +15,10 @@ postfix=""
 Expression=""
 Layout=[
     [sg.Text("Please enter the Expression:"),sg.InputText()],
-    [sg.Text(f"Infix:{infix}")],
-    [sg.Text(f"Prefix:{prefix}")],
-    [sg.Text(f"Postfix:{postfix}")],
+    [sg.Text("prefix:", key="prefix")],
+    [sg.Text("infix:",key="infix")],
+
+    [sg.Text("postfix:",key="postfix")],
 
     [sg.Button("Get Convert Expression"),sg.Button("Cancel")
      ]
@@ -27,10 +28,13 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
-    Expression=values[0]
-    infix=Convert(Expression)[1]
-    prefix=Convert(Expression)[0]
-    postfix=Convert(Expression)[2]
+    elif event== "Get Convert Expression":
+     Expression=values[0]
+     window["infix"].Update(f"infix: {Convert(Expression)[1]}")
+     window["postfix"].Update(f"postfix: {Convert(Expression)[2]}")
+     window["prefix"].Update(f"prefix: {Convert(Expression)[0]}")
+
+
 
 
 
